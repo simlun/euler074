@@ -2,7 +2,8 @@
   (:gen-class))
 
 (defn integer-to-list [integer]
-  (map #(- (int %) (int \0)) (str integer)))
+  (let [char-to-int #(- (int %) (int \0))]
+    (map char-to-int (str integer))))
 
 (defn factorial [n]
   (let [r (range 1 (inc n))]
@@ -10,9 +11,8 @@
     1
     (reduce * r))))
 
-(def factorial-memo (memoize factorial))
-
 (defn sum-of-factorials [integers]
+  (def factorial-memo (memoize factorial))
   (reduce + (map factorial-memo integers)))
 
 (defn non-repeating-terms [starting-number]
@@ -25,13 +25,16 @@
 
 (defn euler074
   ([] (euler074 1000000 60))
-  ([up-to n]
-    (count (filter #(= n (count %)) (map non-repeating-terms (range 1 (inc up-to)))))))
+  ([up-to chain-length]
+    (let [right-chain-length? #(= chain-length (count %))
+          starting-numbers (range 1 (inc up-to))]
+      (count (filter right-chain-length? (map non-repeating-terms starting-numbers))))))
 
 (defn -main [& args]
-  (if (= 2 (count args))
-    (let [up-to (read-string (nth args 0))
-          n (read-string (nth args 1))]
-      (println (euler074 up-to n)))
-    (println (euler074))))
+  (println 
+    (if (= 2 (count args))
+      (let [up-to (read-string (nth args 0))
+            chain-length (read-string (nth args 1))]
+        (euler074 up-to chain-length))
+      (euler074))))
 
