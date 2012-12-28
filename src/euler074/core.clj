@@ -29,7 +29,9 @@
     (count (filter #(= n (count %)) (map non-repeating-terms (range 1 (inc up-to)))))))
 
 (defn -main [& args]
-  (let [up-to (read-string (nth args 0))
-        n (read-string (nth args 1))]
-  (println (euler074 up-to n))))
+  (if (= 2 (count args))
+    (let [up-to (read-string (nth args 0))
+          n (read-string (nth args 1))]
+      (println (euler074 up-to n)))
+    (println (euler074))))
 
