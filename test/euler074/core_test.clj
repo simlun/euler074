@@ -34,9 +34,12 @@
 (fact
   (non-repeating-terms 540) => '(540 145)
   (provided
-    (integer-to-list 540) => '(5 4 0)))
+   (integer-to-list 540) => '(5 4 0)
+   (integer-to-list 145) => '(1 4 5)))
 
-(future-fact
-  (non-repeating-terms 78) => '(78 45360 871 45361)
-  (provided
-    (integer-to-list 78) => '(7 8)))
+(fact
+ (integer-to-list 145) => '(1 4 5)
+ (integer-to-list 540) => '(5 4 0))
+
+(fact
+  (non-repeating-terms 78) => '(78 45360 871 45361))
