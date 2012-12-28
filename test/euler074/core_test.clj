@@ -12,11 +12,7 @@
     (sum-of-factorials '(1 4 5)) => 145))
 
 (fact
-  (sum-of-factorials '(1 4 5)) => 145
-  (provided
-    (factorial 1) => 1
-    (factorial 4) => 24
-    (factorial 5) => 120))
+  (sum-of-factorials '(1 4 5)) => 145)
 
 (fact
   (factorial 0) => 1
@@ -26,10 +22,7 @@
   (factorial 9) => 362880)
 
 (fact
-  (sum-of-factorials '(6 9)) => 363600
-  (provided 
-    (factorial 6) => 720
-    (factorial 9) => 362880))
+  (sum-of-factorials '(6 9)) => 363600)
 
 (fact
   (non-repeating-terms 540) => '(540 145)
@@ -39,7 +32,12 @@
 
 (fact
  (integer-to-list 145) => '(1 4 5)
- (integer-to-list 540) => '(5 4 0))
+ (integer-to-list 540) => '(5 4 0)
+ (integer-to-list 7) => '(7))
 
 (fact
-  (non-repeating-terms 78) => '(78 45360 871 45361))
+ (non-repeating-terms 78) => '(78 45360 871 45361))
+
+(fact
+ (euler074 1 1) => 1
+ (euler074 2 1) => 2)

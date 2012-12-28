@@ -9,6 +9,8 @@
     1
     (reduce * r))))
 
+(def factorial-memo (memoize factorial))
+
 (defn sum-of-factorials [integers]
   (reduce + (map factorial integers)))
 
@@ -16,8 +18,13 @@
   (if (some #{target} coll) true false))
 
 (defn non-repeating-terms [starting-number]
-  (loop [chain (list starting-number)]
+  (loop [chain [starting-number]]
     (let [next-term (sum-of-factorials (integer-to-list (last chain)))]
       (if (linear-contains? chain next-term)
         chain
-        (recur (concat chain (list next-term)))))))
+        (recur (conj chain next-term))))))
+
+(defn euler074
+  ([] (euler074 1000000 60))
+  ([up-to n]
+    (count (filter #(= n (count %)) (map non-repeating-terms (range 1 (inc up-to)))))))
