@@ -15,15 +15,13 @@
 (defn sum-of-factorials [integers]
   (reduce + (map factorial integers)))
 
-(defn- linear-contains? [coll target]
-  (if (some #{target} coll) true false))
-
 (defn non-repeating-terms [starting-number]
-  (loop [chain [starting-number]]
-    (let [next-term (sum-of-factorials (integer-to-list (last chain)))]
-      (if (linear-contains? chain next-term)
+  (loop [chain #{starting-number}
+         previous-term starting-number]
+    (let [next-term (sum-of-factorials (integer-to-list previous-term))]
+      (if (contains? chain next-term)
         chain
-        (recur (conj chain next-term))))))
+        (recur (conj chain next-term) next-term)))))
 
 (defn euler074
   ([] (euler074 1000000 60))
