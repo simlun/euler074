@@ -13,7 +13,7 @@
 (def factorial-memo (memoize factorial))
 
 (defn sum-of-factorials [integers]
-  (reduce + (map factorial integers)))
+  (reduce + (map factorial-memo integers)))
 
 (defn non-repeating-terms [starting-number]
   (loop [chain #{starting-number}
