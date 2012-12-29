@@ -32,6 +32,7 @@
   (factorial 9) => 362880)
 
 (fact
+ (integer-to-list 123456) => '(1 2 3 4 5 6)
  (integer-to-list 145) => '(1 4 5)
  (integer-to-list 540) => '(5 4 0)
  (integer-to-list 7) => '(7))

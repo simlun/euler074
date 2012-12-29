@@ -2,8 +2,13 @@
   (:gen-class))
 
 (defn integer-to-list [integer]
-  (let [char-to-int #(- (int %) (int \0))]
-    (map char-to-int (str integer))))
+  (loop [integer-to-explode integer
+         digits ()]
+    (let [next-integer-to-explode (unchecked-divide-int integer-to-explode 10)
+          next-digits (conj digits (unchecked-remainder-int integer-to-explode 10))]
+      (if (= next-integer-to-explode 0)
+        next-digits
+        (recur next-integer-to-explode next-digits)))))
 
 (defn factorial [n]
   (let [r (range 1 (inc n))]
