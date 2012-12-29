@@ -16,8 +16,9 @@
     1
     (reduce * r))))
 
+(def factorial-memo (memoize factorial))
+
 (defn sum-of-factorials [integers]
-  (def factorial-memo (memoize factorial))
   (reduce + (map factorial-memo integers)))
 
 (defn non-repeating-terms [starting-number]
