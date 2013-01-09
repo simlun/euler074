@@ -1,4 +1,5 @@
 (ns euler074.core
+  (:use (clojure.tools cli))
   (:gen-class))
 
 (defn integer-to-list [integer]
@@ -30,18 +31,22 @@
         chain
         (recur (conj chain next-term) next-term)))))
 
-(defn euler074
-  ([] (euler074 1000000 60))
-  ([up-to chain-length]
-    (let [right-chain-length? #(= chain-length (count %))
-          starting-numbers (range 1 (inc up-to))]
-      (count (filter right-chain-length? (map non-repeating-terms starting-numbers))))))
+(defn euler074 [up-to chain-length]
+  (let [right-chain-length? #(= chain-length (count %))
+        starting-numbers (range 1 (inc up-to))]
+    (count (filter right-chain-length? (map non-repeating-terms starting-numbers)))))
 
 (defn -main [& args]
-  (println 
-    (if (= 2 (count args))
-      (let [up-to (read-string (nth args 0))
-            chain-length (read-string (nth args 1))]
-        (euler074 up-to chain-length))
-      (euler074))))
+  (let [[args trailing-args help-text]
+        (cli args 
+             ["-u" "--up-to"
+              "Create chains with starting numbers below this value"
+              :parse-fn #(Integer. %)
+              :default 1000000]
+             ["-c" "--chain-length" 
+              "The chains should contain this many non-repeating terms" 
+              :parse-fn #(Integer. %)
+              :default 60])]
+    (println 
+      (euler074 (args :up-to) (args :chain-length)))))
 
