@@ -9,7 +9,7 @@
   (non-repeating-terms 145) => #{145}
   (provided
     (integer-to-list 145) => '(1 4 5)
-    (sum-of-factorials '(1 4 5)) => 145))
+    (sum-of-factorials-memo '(1 4 5)) => 145))
 
 (fact
   (non-repeating-terms 540) => #{540 145}
@@ -21,8 +21,8 @@
  (non-repeating-terms 78) => #{78 45360 871 45361})
 
 (fact
-  (sum-of-factorials '(1 4 5)) => 145
-  (sum-of-factorials '(6 9)) => 363600)
+  (sum-of-factorials-memo '(1 4 5)) => 145
+  (sum-of-factorials-memo '(6 9)) => 363600)
 
 (fact
   (factorial 0) => 1

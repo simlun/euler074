@@ -16,15 +16,16 @@
     1
     (reduce * r))))
 
-(def factorial-memo (memoize factorial))
-
 (defn sum-of-factorials [integers]
-  (reduce + (map factorial-memo integers)))
+  (reduce + (map factorial integers)))
+
+(def sum-of-factorials-memo (memoize sum-of-factorials))
 
 (defn non-repeating-terms [starting-number]
   (loop [chain #{starting-number}
          previous-term starting-number]
-    (let [next-term (sum-of-factorials (integer-to-list previous-term))]
+    (let [sorted-previous-term-integers (sort (integer-to-list previous-term))
+          next-term (sum-of-factorials-memo sorted-previous-term-integers)]
       (if (contains? chain next-term)
         chain
         (recur (conj chain next-term) next-term)))))
