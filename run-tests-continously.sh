@@ -1,3 +1,3 @@
 #!/bin/bash
 set -e
-lein midje --lazytest
+lein midje :autotest
