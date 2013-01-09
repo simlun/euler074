@@ -29,3 +29,7 @@ ACTUAL=`./run.sh --up-to 2500 --chain-length 20`
 EXPECTED=21 # This value was found by running the program at commit cbb1962
 [[ "$EXPECTED" == "$ACTUAL" ]] && echo "OK" || fail "$EXPECTED" "$ACTUAL"
 
+ACTUAL=`./run.sh --help | head -n 1`
+EXPECTED="Usage:"
+[[ "$EXPECTED" == "$ACTUAL" ]] && echo "OK" || fail "$EXPECTED" "$ACTUAL"
+

@@ -37,7 +37,7 @@
     (count (filter right-chain-length? (map non-repeating-terms starting-numbers)))))
 
 (defn -main [& args]
-  (let [[args trailing-args help-text]
+  (let [[options trailing-args help-text]
         (cli args 
              ["-u" "--up-to"
               "Create chains with starting numbers below this value"
@@ -46,7 +46,14 @@
              ["-c" "--chain-length" 
               "The chains should contain this many non-repeating terms" 
               :parse-fn #(Integer. %)
-              :default 60])]
+              :default 60]
+              ["-h" "--help"
+              "Show help" 
+              :default false 
+              :flag true])]
+    (when (:help options)
+      (println help-text)
+      (System/exit 0))
     (println 
-      (euler074 (args :up-to) (args :chain-length)))))
+      (euler074 (options :up-to) (options :chain-length)))))
 
